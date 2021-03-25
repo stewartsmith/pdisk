@@ -57,10 +57,6 @@
 /*
  * Defines
  */
-#ifdef __linux__
-#define LOFF_MAX 9223372036854775807LL
-extern __loff_t llseek __P ((int __fd, __loff_t __offset, int __whence));
-#else
 #ifdef __unix__
 #define loff_t off_t
 #define llseek lseek
@@ -70,8 +66,6 @@ extern __loff_t llseek __P ((int __fd, __loff_t __offset, int __whence));
 #define llseek lseek
 #define LOFF_MAX LONG_MAX
 #endif
-#endif
-
 
 /*
  * Types
