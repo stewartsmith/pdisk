@@ -22,10 +22,8 @@
  * @APPLE_LICENSE_HEADER_END@
  */
 #include <stdio.h>
-#ifndef __linux__
 #include <stdlib.h>
 #include <unistd.h>
-#endif
 #include <string.h>
 #include <errno.h>
 #include <fcntl.h>
@@ -33,9 +31,9 @@
 #include "io.h"
 #include "errors.h"
 
-#import "pdisk.h"
-#import "partition_map.h"
-#import "dump.h"
+#include "pdisk.h"
+#include "partition_map.h"
+#include "dump.h"
 
 #define CMD_FAIL	1
 #define CMD_SUCCESS	0
