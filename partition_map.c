@@ -33,6 +33,7 @@
 #include <stdlib.h>
 #else
 #include <malloc.h>
+#include <bsd/string.h>
 #endif
 
 // for strncpy() & strcmp()
