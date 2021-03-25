@@ -28,6 +28,7 @@
 // for *printf()
 #include <stdio.h>
 #include <errno.h>
+#include <stdlib.h>
 
 // for exit()
 #ifndef __linux__
@@ -142,7 +143,9 @@ fatal(int value, const char *fmt, ...)
     vfprintf(stderr, fmt, ap);
     va_end(ap);
 
-#if defined(__linux__) || defined(NeXT) || defined(__unix__)
+#if defined(__linux__)
+    fprintf(stderr, "  (%s)\n", strerror(value));
+#elif defined(NeXT) || defined(__unix__)
     if (value > 0 && value < sys_nerr) {
 	fprintf(stderr, "  (%s)\n", sys_errlist[value]);
     } else {
@@ -171,7 +174,9 @@ error(int value, const char *fmt, ...)
     vfprintf(stderr, fmt, ap);
     va_end(ap);
 
-#if defined(__linux__) || defined(NeXT) || defined(__unix__)
+#if defined(__linux__)
+    fprintf(stderr, "  (%s)\n", strerror(value));
+#elif defined(NeXT) || defined(__unix__)
     if (value > 0 && value < sys_nerr) {
 	fprintf(stderr, "  (%s)\n", sys_errlist[value]);
     } else {
