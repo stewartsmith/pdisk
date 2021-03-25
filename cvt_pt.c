@@ -21,6 +21,9 @@
 #include <stdarg.h>
 #include <errno.h>
 #include <ctype.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
 
 #include "partition_map.h"
 #include "errors.h"
@@ -173,7 +176,7 @@ process(char *filename)
     }
 
     // 2)       open prefix of filename as partition map
-    map = open_partition_map(s, &valid_file, 0);
+    map = open_partition_map(s, &valid_file, 0, O_RDWR);
     if (!valid_file) {
         fatal(-1, "%s does not have a partition map", s);
         return;
