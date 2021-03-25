@@ -48,6 +48,8 @@ MAC_SOURCE= \
 UNIX_SOURCE= \
 	bitfield.c \
 	bitfield.h \
+	cmdline.c \
+	cmdline.h \
 	convert.c \
 	convert.h \
 	cvt_pt.c \
@@ -97,11 +99,14 @@ COMMON_OBJECTS = \
 UNIX_OBJECTS = \
 	pdisk.o \
 	dump.o \
+	cmdline.o \
 	$(COMMON_OBJECTS) \
 	validate.o
 
 CVT_OBJECTS = \
 	cvt_pt.o \
+	cmdline.o \
+	dump.o \
 	$(COMMON_OBJECTS)
 
 
@@ -136,10 +141,10 @@ DIST_TAR_FLAGS = cvf
 all: $(UNIX_BINARIES)
 
 pdisk: $(UNIX_OBJECTS)
-	cc -o pdisk $(UNIX_OBJECTS)
+	cc -o pdisk -lbsd $(UNIX_OBJECTS)
 
 cvt_pt: $(CVT_OBJECTS)
-	cc -o cvt_pt $(CVT_OBJECTS)
+	cc -o cvt_pt -lbsd $(CVT_OBJECTS)
 
 tags:	$(MAC_SOURCE) $(UNIX_SOURCE)
 	ctags $(MAC_SOURCE) $(UNIX_SOURCE)
